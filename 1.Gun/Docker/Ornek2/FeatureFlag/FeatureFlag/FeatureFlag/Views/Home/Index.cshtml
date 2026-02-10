@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">v4 canary</h1>
+    <h3 class="display-4">UserName: @Environment.GetEnvironmentVariable("unsensitivekey")</h3>
+    <h3 class="display-4">Password: @Environment.GetEnvironmentVariable("sensitivekey")</h3>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
+    
+    <feature name="FeatureA">
+        <p>This can only be seen if 'FeatureA' is enabled.</p>
+    </feature>
+    
+    <feature name="FeatureA, FeatureB" requirement="All">
+        <p>This can only be seen if 'FeatureA' and 'FeatureB' are enabled.</p>
+    </feature>
+    
+    <feature name="FeatureA, FeatureB" requirement="Any">
+        <p>This can be seen if 'FeatureA', 'FeatureB', or both are enabled.</p>
+    </feature>
+    
+</div>

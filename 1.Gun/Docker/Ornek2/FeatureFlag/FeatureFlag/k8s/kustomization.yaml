@@ -1,0 +1,4 @@
+resources:
+  - featureflag-deployment.yaml
+  - featureflag-configmap.yaml
+  - featureflag-service.yaml

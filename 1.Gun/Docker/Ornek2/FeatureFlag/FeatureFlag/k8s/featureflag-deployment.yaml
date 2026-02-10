@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: featureflag-deployment
+  labels:
+    app: featureflag
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      service: featureflag
+  template:
+    metadata:
+      labels:
+        app: featureflag
+        service: featureflag
+    spec:
+      containers:
+        - name: featureflag
+          image: cahityusuf/featureflag:tekton-6
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "0.3"
+            limits:
+              memory: "500Mi"
+              cpu: "0.3"
+          env:
+            - name:  ASPNETCORE_ENVIRONMENT
+              value:  Production
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+            - name: FeatureManagement__FeatureA
+              valueFrom:
+                  configMapKeyRef:
+                    name: featureflag-configmap
+                    key: featurea                  
+            - name: FeatureManagement__FeatureB
+              valueFrom:
+                  configMapKeyRef:
+                    name: featureflag-configmap
+                    key: featureb
