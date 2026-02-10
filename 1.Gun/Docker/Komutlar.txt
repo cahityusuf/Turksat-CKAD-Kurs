@@ -1,0 +1,21 @@
+docker build -t cahityusuf/deneme2:latest .
+docker build -f /Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/1.Gun/Docker/Ornek2/FeatureFlag/FeatureFlag/FeatureFlag/Dockerfile -t cahityusuf/deneme2:latest /Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/1.Gun/Docker/Ornek2/FeatureFlag/FeatureFlag/
+
+docker run -t cahityusuf/deneme2:latest
+docker run -p 8080:8080 -d -t cahityusuf/deneme2:latest
+docker run -p 8080:8080 -e "unsensitivekey=unsensitivekey-env" -d -t cahityusuf/deneme2:latest
+docker run -p 8080:8080 -v /Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/1.Gun/Docker/Ornek2/logs:/app/wwwroot -e "unsensitivekey=unsensitivekey-env" -d -t cahityusuf/deneme2:latest
+
+
+docer ps
+docker kill <ID>
+docker pull
+docker push
+docker tag <Mevcut-Tag> <Yeni-Tag>
+docker log <ID>
+docker exec -it <ID> /bin/bash
+docker buildx build --platform linux/amd64,linux/arm64   (Multi platform desteği)
+docker rmi 5138 7eba ea13 --force
+docker images
+
+
