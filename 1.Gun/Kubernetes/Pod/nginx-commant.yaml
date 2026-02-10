@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx-command
+  name: nginx-command
+spec:
+  containers:
+  - image: nginx:latest
+    name: nginx-command
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
