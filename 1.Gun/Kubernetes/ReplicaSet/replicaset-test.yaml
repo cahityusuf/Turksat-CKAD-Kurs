@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"ReplicaSet","metadata":{"annotations":{},"labels":{"app":"nginx","tier":"nginx"},"name":"nginx","namespace":"default"},"spec":{"replicas":3,"selector":{"matchLabels":{"tier":"nginx"}},"template":{"metadata":{"labels":{"tier":"nginx"}},"spec":{"containers":[{"image":"nginx:latest","name":"nginx"}]}}}}
+  creationTimestamp: "2026-02-10T13:20:01Z"
+  generation: 3
+  labels:
+    app: nginx
+    tier: nginx
+  name: nginx
+  namespace: default
+  resourceVersion: "6334"
+  uid: e16375e1-aba6-4731-8fac-3e275630e2e6
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: nginx
+  template:
+    metadata:
+      labels:
+        tier: nginx
+    spec:
+      containers:
+      - image: nginx:latest
+        imagePullPolicy: Always
+        name: nginx
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 2
+  fullyLabeledReplicas: 2
+  observedGeneration: 3
+  readyReplicas: 2
+  replicas: 2
