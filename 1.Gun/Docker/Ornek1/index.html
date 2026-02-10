@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DevOpsZon • Rollout Test</title>
+
+  <style>
+    :root{
+      --bg1:#0b1220; --bg2:#111b2f;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.14);
+      --text:#eaf0ff; --muted: rgba(234,240,255,.72);
+      --shadow: 0 24px 70px rgba(0,0,0,.45);
+      --radius: 18px;
+      --ok:#3cff9a; --warn:#ffd166;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(67,97,238,.35), transparent 60%),
+        radial-gradient(900px 700px at 80% 20%, rgba(76,201,240,.28), transparent 55%),
+        radial-gradient(900px 700px at 50% 90%, rgba(247, 37, 133,.20), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      display:grid; place-items:center;
+      padding: 28px 16px;
+    }
+    .wrap{width:min(1024px, 100%); display:grid; gap:14px;}
+    .card{
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .top{padding:22px; display:flex; justify-content:space-between; gap:14px; align-items:flex-start;}
+    .brand{display:flex; gap:12px; align-items:center;}
+    .logo{
+      width:44px; height:44px; border-radius:14px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), transparent 55%),
+        linear-gradient(135deg, rgba(76,201,240,.95), rgba(67,97,238,.95));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 14px 30px rgba(67,97,238,.25);
+      position:relative;
+    }
+    .logo:after{content:""; position:absolute; inset:10px; border-radius:10px; border:1px dashed rgba(255,255,255,.28);}
+
+    h1{margin:0; font-size:clamp(20px,3.2vw,28px); line-height:1.15;}
+    .subtitle{margin:6px 0 0 0; color:var(--muted); font-size:14px; line-height:1.5;}
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(88,255,166,.35);
+      background: rgba(88,255,166,.08);
+      color: rgba(226,255,240,.95);
+      font-weight:650; white-space:nowrap;
+    }
+    .dot{width:10px; height:10px; border-radius:50%; background: var(--ok); box-shadow:0 0 0 4px rgba(60,255,154,.12);}
+
+    .grid{display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:12px; padding: 0 22px 22px;}
+    .mini{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      padding:14px;
+    }
+    .k{margin:0 0 6px; color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em;}
+    .v{margin:0; font-size:15px; font-weight:650;}
+    code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:.95em;
+      background: rgba(255,255,255,.10);
+      padding:2px 8px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .section{padding: 0 22px 22px;}
+    .section h2{margin:0 0 10px; font-size:16px; letter-spacing:.2px;}
+    .section p{margin:0; color:var(--muted); font-size:13px; line-height:1.55;}
+    .notes{
+      margin-top:12px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .notes .header{
+      display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,209,102,.30);
+      background: rgba(255,209,102,.10);
+      color: rgba(255,240,210,.95);
+      font-weight:650; font-size:12px;
+    }
+    .notes pre{
+      margin:0;
+      white-space:pre-wrap;
+      word-break:break-word;
+      color: rgba(234,240,255,.92);
+      font-size: 13px;
+      line-height:1.6;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    .btn{
+      appearance:none; border:none; cursor:pointer;
+      padding:8px 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      color: var(--text);
+      font-weight:650;
+    }
+    .btn:hover{ background: rgba(255,255,255,.14); }
+
+    .footer{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding: 14px 22px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 920px){
+      .grid{grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width: 640px){
+      .top{flex-direction:column;}
+      .grid{grid-template-columns:1fr;}
+      .footer{flex-direction:column; align-items:flex-start;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>DevOpsZon Rollout Test Sayfası</h1>
+            <p class="subtitle">
+              Bu sayfa, rollout stratejindeki versiyon geçişlerini görsel olarak doğrulamak için tasarlandı.
+              (Yeni pod/versiyon geldiğinde buradaki sürüm alanını değiştirip doğrulayabilirsin.)
+            </p>
+          </div>
+        </div>
+
+        <div class="pill" title="Servis Sağlıklı">
+          <span class="dot"></span>
+          Healthy
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="mini">
+          <p class="k">Uygulama</p>
+          <p class="v"><code>devopszon-nginx-test</code></p>
+        </div>
+
+        <div class="mini">
+          <p class="k">Sürüm</p>
+          <p class="v"><code id="version">v1</code></p>
+        </div>
+
+        <div class="mini">
+          <p class="k">Ortam</p>
+          <p class="v"><code id="env">local</code></p>
+        </div>
+
+        <div class="mini">
+          <p class="k">Endpoint</p>
+          <p class="v"><code>http://localhost:8080</code></p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Serbest Test Alanı</h2>
+        <p>
+          Buraya rollout sırasında görmek istediğin test metinlerini yazabilirsin.
+          Sayfa açılırken <code>notes.html</code> dosyası varsa otomatik çekilir ve aşağıda gösterilir.
+          (Yoksa index.html içindeki varsayılan metin görünür.)
+        </p>
+
+        <div class="notes">
+          <div class="header">
+            <div class="badge">NOTES • runtime yansıtılabilir</div>
+            <button class="btn" onclick="location.reload()">Yenile</button>
+          </div>
+          <pre id="notesArea">- Buraya test notlarını ekleyebilirsin.
+- Deneme türksat container</pre>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div>Doğrulama: <code>curl -s http://localhost:8080</code></div>
+        <div>DevOpsZon Türksat</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // İstersen deploy sırasında env var ile versiyon basmak yerine
+    // index.html içindeki #version değerini her release’te güncelleyebilirsin.
+
+    async function loadNotes() {
+      try {
+        const res = await fetch('/notes.html', { cache: 'no-store' });
+        if (!res.ok) return;
+        const text = await res.text();
+
+        // notes.html içine düz metin yazsan bile çalışsın diye HTML taglarını sadeleştiriyoruz
+        const tmp = document.createElement('div');
+        tmp.innerHTML = text;
+
+        const normalized = (tmp.textContent || '').trim();
+        if (normalized) document.getElementById('notesArea').textContent = normalized;
+      } catch (_) {
+        // sessiz geç
+      }
+    }
+
+    loadNotes();
+  </script>
+</body>
+</html>
