@@ -21,7 +21,10 @@ spec:
         name: featureflag-turksat
         env:
         - name: sensitivekey
-          value: sensitivekey-env-turksat
+          valueFrom:
+            secretKeyRef:
+              name: featureflag-secret
+              key: sensitivekey
         - name: unsensitivekey
           valueFrom:
             configMapKeyRef:
