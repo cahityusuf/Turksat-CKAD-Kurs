@@ -1,50 +1,11 @@
 apiVersion: v1
-items:
-- apiVersion: v1
-  data:
-    ca.crt: |
-      -----BEGIN CERTIFICATE-----
-      MIIDBzCCAe+gAwIBAgIIdjA76tqfqxcwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
-      AxMKa3ViZXJuZXRlczAgFw0yNjAyMDkwMDI0NDRaGA8yMTI2MDExNjAwMjk0NFow
-      FTETMBEGA1UEAxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
-      AQoCggEBAMLuUjFF+200akGbv19R6dMxpdsegNd0nSB8TpCctFKzCrF2HlotZ3Km
-      lUl1+IyqYFSQmzffAlcF+Se+UuzCcfAiyum+Nmhj+FdpQt0yIM8FiJPSP4VR9tXA
-      fZADbKpY7wOv1iZdk9OrbX9XD+YJQ5ojJgLJsht0brClfKWJJz7l9lhJ897XxGu3
-      XwyWGSV0OtsHVJVmuZ2UjNoNOaPWc3MXbaPzOhIh2uuDAlrh5cDtI5rmRz/heVnn
-      6bFYxncHnIp899lxZgt1PwluyM9a25YLH35lE+Zrtlg58/AK3SBuWfZNq3QBFem1
-      iCAH+n4M6x8uIoxN2Vqncj7rnqFOZI0CAwEAAaNZMFcwDgYDVR0PAQH/BAQDAgKk
-      MA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFA3NTX5ac64WCEhex553ZTkB1DTD
-      MBUGA1UdEQQOMAyCCmt1YmVybmV0ZXMwDQYJKoZIhvcNAQELBQADggEBAC8yzERr
-      +zOndi7koRR6ivWHyUzURrCen+kXt1XUu/+lNsoNIuLCrOTbeeZIf1vsujmQAJ9x
-      sc44b2mkCMdMkq3rwEKN2lpwBPg9WXRaRykOHdshesxIjvoek9zG1z3hu9vBZijV
-      dC+SKIKQbMrHgWZnYsUbS2yVc0jurFAgooexQ+gqDS/6C/dUT7iu+JOAVCIoOCZd
-      X+O9UV54KkPSXIIm0MqucIqh0/H/2s1g140q4+fsd1mP7COKHY7t7dmbb+FWnLrG
-      J+w1wT8X/0H1h+SVvZYyBbk3LxJuKNkBVEMDe5UboqLzQopK25TGyZPnzdSBO2gV
-      kcRv5pSIFmgI+Ao=
-      -----END CERTIFICATE-----
-  kind: ConfigMap
-  metadata:
-    annotations:
-      kubernetes.io/description: Contains a CA bundle that can be used to verify the
-        kube-apiserver when using internal endpoints such as the internal service
-        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
-        of Kubernetes clusters.
-    creationTimestamp: "2026-02-11T07:11:47Z"
-    name: kube-root-ca.crt
-    namespace: dev
-    resourceVersion: "67400"
-    uid: 562e6c12-f495-4a9d-b5fa-baf63222e03a
-- apiVersion: v1
-  data:
-    deneme: test
-    environment: production
-  kind: ConfigMap
-  metadata:
-    creationTimestamp: "2026-02-11T08:29:24Z"
-    name: nginx-configmap
-    namespace: dev
-    resourceVersion: "72288"
-    uid: 727b3be1-4823-4000-8acc-57ad1a8cc4b7
-kind: List
+data:
+  deneme: test
+  environment: production
+kind: ConfigMap
 metadata:
-  resourceVersion: ""
+  creationTimestamp: "2026-02-11T08:29:24Z"
+  name: nginx-configmap
+  namespace: dev
+  resourceVersion: "72288"
+  uid: 727b3be1-4823-4000-8acc-57ad1a8cc4b7

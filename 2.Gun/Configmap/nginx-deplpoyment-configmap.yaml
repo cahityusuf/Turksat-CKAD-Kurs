@@ -19,5 +19,12 @@ spec:
       containers:
       - image: nginx:latest
         name: nginx
+        env:
+          - name: NGINX_CONFIGMAP_NAME
+            value: nginx-configmap
+          - valueFrom:
+              configMapKeyRef:
+                name: nginx-configmap          # The ConfigMap this value comes from.
+                key: environment 
         resources: {}
 status: {}
