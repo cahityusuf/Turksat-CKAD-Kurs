@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: featureflag
+  name: featureflag
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: featureflag
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: featureflag
+    spec:
+      containers:
+      - image: cahityusuf/featureflag-turksat:v1
+        name: featureflag-turksat
+        env:
+        - name: sensitivekey
+          value: sensitivekey-env-turksat
+        - name: unsensitivekey
+          valueFrom:
+            configMapKeyRef:
+              name: featureflag-configmap
+              key: unsensitivekey
+        resources: {}
+status: {}

@@ -1,5 +1,7 @@
 docker build -t cahityusuf/deneme2:latest .
-docker build -f /Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/1.Gun/Docker/Ornek2/FeatureFlag/FeatureFlag/FeatureFlag/Dockerfile -t cahityusuf/deneme2:latest /Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/1.Gun/Docker/Ornek2/FeatureFlag/FeatureFlag/
+docker build -f /Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/1.Gun/Docker/Ornek2/FeatureFlag/FeatureFlag/FeatureFlag/Dockerfile -t cahityusuf/featureflag-turksat:latest /Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/1.Gun/Docker/Ornek2/FeatureFlag/FeatureFlag/
+
+docker buildx build --platform linux/amd64,linux/arm64 -f /Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/1.Gun/Docker/Ornek2/FeatureFlag/FeatureFlag/FeatureFlag/Dockerfile -t cahityusuf/featureflag-turksat:v1 /Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/1.Gun/Docker/Ornek2/FeatureFlag/FeatureFlag/
 
 docker run -t cahityusuf/deneme2:latest
 docker run -p 8080:8080 -d -t cahityusuf/deneme2:latest

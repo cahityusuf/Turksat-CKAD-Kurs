@@ -22,9 +22,15 @@ spec:
         env:
           - name: NGINX_CONFIGMAP_NAME
             value: nginx-configmap
-          - valueFrom:
+          - name: ENVIRONMENT__ENVIRONMENT
+            valueFrom:
               configMapKeyRef:
                 name: nginx-configmap          # The ConfigMap this value comes from.
                 key: environment 
+          - name: DENEME__ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: nginx-configmap          # The ConfigMap this value comes from.
+                key: deneme 
         resources: {}
 status: {}
