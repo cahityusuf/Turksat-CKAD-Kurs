@@ -21,22 +21,10 @@ spec:
     spec:
       tolerations:
       - key: "dedicated"
-        operator: "Equal"
-        value: "gpu"
+        operator: "Exists"
         effect: "NoSchedule"
       containers:
-      - env:
-        - name: sensitivekey
-          valueFrom:
-            secretKeyRef:
-              key: sensitivekey
-              name: featureflag-secret
-        - name: unsensitivekey
-          valueFrom:
-            configMapKeyRef:
-              key: unsensitivekey
-              name: featureflag-configmap
-        image: cahityusuf/featureflag-turksat:v1
+      - image: cahityusuf/featureflag-turksat:v1
         imagePullPolicy: Always
         name: featureflag-turksat
         resources:
