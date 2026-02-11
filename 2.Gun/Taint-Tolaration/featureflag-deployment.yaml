@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: featureflag
+  name: featureflag
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: featureflag
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: featureflag
+    spec:
+      tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "gpu"
+        effect: "NoSchedule"
+      containers:
+      - env:
+        - name: sensitivekey
+          valueFrom:
+            secretKeyRef:
+              key: sensitivekey
+              name: featureflag-secret
+        - name: unsensitivekey
+          valueFrom:
+            configMapKeyRef:
+              key: unsensitivekey
+              name: featureflag-configmap
+        image: cahityusuf/featureflag-turksat:v1
+        imagePullPolicy: Always
+        name: featureflag-turksat
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 4Mi
+      serviceAccountName: featureflag-serviceaccount
