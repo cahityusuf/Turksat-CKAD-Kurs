@@ -1,0 +1,15 @@
+kubectl run frontend --image=nginx  
+kubectl run backend --image=nginx  
+
+kubectl expose po frontend --port 80
+kubectl expose po backend --port 80
+
+kubectl exec frontend -- curl backend
+kubectl exec backend -- curl frontend
+
+kubectl create ns postgres
+
+kubectl edit ns postgres
+
+ns=postgres => label ekle
+
