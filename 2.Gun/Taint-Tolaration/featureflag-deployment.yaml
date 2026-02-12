@@ -19,9 +19,12 @@ spec:
       labels:
         app: featureflag
     spec:
+      nodeSelector:
+        type: backend
       tolerations:
-      - key: "dedicated"
-        operator: "Exists"
+      - key: "type"
+        value: "backend"
+        operator: "Equal"
         effect: "NoSchedule"
       containers:
       - image: cahityusuf/featureflag-turksat:v1
