@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: featureflag
+  name: featureflag
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: featureflag
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: featureflag
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd
+      containers:
+      - image: cahityusuf/featureflag-turksat:v1
+        imagePullPolicy: Always
+        name: featureflag-turksat
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 4Mi
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: featureflag-serviceaccount
+      serviceAccountName: featureflag-serviceaccount
+      terminationGracePeriodSeconds: 30
