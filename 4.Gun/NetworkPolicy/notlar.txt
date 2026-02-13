@@ -13,3 +13,8 @@ kubectl edit ns postgres
 
 ns=postgres => label ekle
 
+
+      - namespaceSelector:
+          matchLabels:
+            ns: postgres
+

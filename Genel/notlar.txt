@@ -5,3 +5,9 @@ kubectl get nodes
 Mac
 export KUBECONFIG=/path/to/kubeconfig
 kubectl config get-contexts
+kubectl get nodes
+
+/Users/cahityusufkafadar/Documents/Kurs/Kurumlar/Turksat/Turksat-CKAD-Kurs/Genel/c572ab06-2ec4-46dc-94ff-d20de1e784cc-pasted-kubeconfig.yaml
+
+
+kubectl get deploy,pod,svc,ingress -n dev
