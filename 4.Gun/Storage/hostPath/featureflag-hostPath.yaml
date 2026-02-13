@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: featureflag
+  name: featureflag
+  namespace: storage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: featureflag
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: featureflag
+    spec:
+      volumes:
+        # Node üzerindeki dizin; pod hangi node'da çalışıyorsa o node'un bu path'i kullanılır
+        - name: logs
+          hostPath:
+            path: /var/log/featureflag
+            type: DirectoryOrCreate  # Yoksa node'da oluşturulur
+      containers:
+      - image: docker.io/cahityusuf/featureflag-turksat:v2
+        imagePullPolicy: IfNotPresent
+        name: featureflag-turksat
+        resources: {}
+        volumeMounts:
+          # Uygulamanın "logs" yazdığı dizin (gerekirse /app/logs veya working dir'e göre değiştir)
+          - name: logs
+            mountPath: /app/logs

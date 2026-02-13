@@ -1,0 +1,7 @@
+Windows
+$env:KUBECONFIG="C:\path\to\kubeconfig"
+kubectl get nodes
+
+Mac
+export KUBECONFIG=/path/to/kubeconfig
+kubectl config get-contexts

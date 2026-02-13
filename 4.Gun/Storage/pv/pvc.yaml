@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: featureflag-logs-pvc
+  namespace: storage
+spec:
+  storageClassName: ""   # PV ile eşleşmesi için boş (manual binding)
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: featureflag-logs-pv 

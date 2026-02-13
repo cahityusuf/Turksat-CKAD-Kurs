@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: featureflag
+  name: featureflag
+  namespace: storage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: featureflag
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: featureflag
+    spec:
+      volumes:
+        - name: logs
+          persistentVolumeClaim:
+            claimName: featureflag-logs-pvc
+      containers:
+      - image: docker.io/cahityusuf/featureflag-turksat:v2
+        imagePullPolicy: IfNotPresent
+        name: featureflag-turksat
+        resources: {}
+        volumeMounts:
+          - name: logs
+            mountPath: /app/logs
